@@ -2,13 +2,14 @@ require('dotenv').config({path:'src/.env'})
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-const authRoutes = require("./routes/authRoutes")
-
+const authRoutes = require("./routes/authRoutes");
+const taskRoutes = require("./routes/taskRoutes");
 //connect to mongoDB
 const MONGODB_URI = process.env.MONGODB_URI
 
 app.use(express.json())
-app.use("/api/auth",authRoutes)
+app.use("/api/auth",authRoutes);
+app.use("/api/task",taskRoutes);
 mongoose.connect(MONGODB_URI).then(()=>console.log('Connected to MongoDB')).catch((err)=>console.log(err))
 app.get("/",(req,res)=>{
     res.send("Backend Server is running")
